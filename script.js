@@ -970,25 +970,78 @@
 
 
 
+  // copy summary text
+  if (qs('#btn-copy')) qs('#btn-copy').addEventListener('click', () => {
+    let summary = '🚀 PROYECTO ÉPICO 🚀\n\nUsuario: ' + state.name + '\n'; if (state.country) summary += 'País: ' + state.country + '\n'; if (state.goal) summary += 'Objetivo: ' + state.goal + '\n'; summary += 'Sitios: ' + state.count + '\n\nDOMINIOS:\n'; for (let i = 0; i < state.count; i++) { summary += 'https://' + (state.domains[i] || '(sin definir)') + '.netlify.app\n'; if (state.desc[i]) summary += 'Descripción: ' + state.desc[i] + '\n'; } navigator.clipboard.writeText(summary).then(() => alert('Resumen copiado al portapapeles.'), () => alert('No se pudo copiar al portapapeles.'));
+  });
+
+  // Reset
+  if (qs('#btn-reset')) qs('#btn-reset').addEventListener('click', () => {
+    state.name = ''; state.country = ''; state.goal = ''; state.count = 1; state.domains = ['']; state.desc = ['']; state.domainCheckIndex = 0;
+    if (inputName) inputName.value = ''; if (qs('#input-country')) qs('#input-country').value = ''; if (qs('#input-goal')) qs('#input-goal').value = '';
+    qsa('.count-btn').forEach(b => b.classList.remove('active')); if (qsa('.count-btn')[0]) qsa('.count-btn')[0].classList.add('active'); show('#step-name');
+  });
+
+  // small UX: enable/disable next name button on load
+  if (btnNameNext) btnNameNext.disabled = true;
+  if (inputName) inputName.addEventListener('input', () => { if (btnNameNext) btnNameNext.disabled = !inputName.value.trim(); });
+
+  // resize confetti canvas on resize
+  window.addEventListener('resize', () => { resizeConfettiFull(); });
+
+  // AI Creator Event Listeners
+  if (qs('#btn-ai-creator')) {
+    qs('#btn-ai-creator').addEventListener('click', () => {
+      show('#step-ai-creator');
+    });
+  }
+
+  if (qs('#btn-ai-back')) {
+    qs('#btn-ai-back').addEventListener('click', () => {
+      show('#step-final');
+    });
+  }
+
+  if (qs('#btn-ai-generate')) {
+    qs('#btn-ai-generate').addEventListener('click', () => {
+      if (window.AICreator) {
+        window.AICreator.handleAIGeneration(state);
+      } else {
+        alert('Error: Módulo de IA no disponible');
+      }
+    });
+  }
+
+  if (qs('#btn-download-html')) {
+    qs('#btn-download-html').addEventListener('click', () => {
+      if (window.AICreator) {
+        window.AICreator.downloadHTMLFile();
+      } else {
+        alert('Error: Módulo de IA no disponible');
+      }
+    });
+  }
+
+  if (qs('#btn-fullscreen')) {
+    qs('#btn-fullscreen').addEventListener('click', () => {
+      if (window.AICreator) {
+        window.AICreator.openFullscreen();
+      } else {
+        alert('Error: Módulo de IA no disponible');
+      }
+    });
+  }
+
+  if (qs('#btn-regenerate')) {
+    qs('#btn-regenerate').addEventListener('click', () => {
+      if (window.AICreator) {
+        window.AICreator.regenerate(state);
+      } else {
+        alert('Error: Módulo de IA no disponible');
+      }
+    });
+  }
+
 })();
-
-// copy summary text
-if (qs('#btn-copy')) qs('#btn-copy').addEventListener('click', () => {
-  let summary = '🚀 PROYECTO ÉPICO 🚀\n\nUsuario: ' + state.name + '\n'; if (state.country) summary += 'País: ' + state.country + '\n'; if (state.goal) summary += 'Objetivo: ' + state.goal + '\n'; summary += 'Sitios: ' + state.count + '\n\nDOMINIOS:\n'; for (let i = 0; i < state.count; i++) { summary += 'https://' + (state.domains[i] || '(sin definir)') + '.netlify.app\n'; if (state.desc[i]) summary += 'Descripción: ' + state.desc[i] + '\n'; } navigator.clipboard.writeText(summary).then(() => alert('Resumen copiado al portapapeles.'), () => alert('No se pudo copiar al portapapeles.'));
-});
-
-// Reset
-if (qs('#btn-reset')) qs('#btn-reset').addEventListener('click', () => {
-  state.name = ''; state.country = ''; state.goal = ''; state.count = 1; state.domains = ['']; state.desc = ['']; state.domainCheckIndex = 0;
-  if (inputName) inputName.value = ''; if (qs('#input-country')) qs('#input-country').value = ''; if (qs('#input-goal')) qs('#input-goal').value = '';
-  qsa('.count-btn').forEach(b => b.classList.remove('active')); if (qsa('.count-btn')[0]) qsa('.count-btn')[0].classList.add('active'); show('#step-name');
-});
-
-// small UX: enable/disable next name button on load
-if (btnNameNext) btnNameNext.disabled = true;
-if (inputName) inputName.addEventListener('input', () => { if (btnNameNext) btnNameNext.disabled = !inputName.value.trim(); });
-
-// resize confetti canvas on resize
-window.addEventListener('resize', () => { resizeConfettiFull(); });
 
 
