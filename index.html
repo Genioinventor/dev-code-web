@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Epic Web Creator</title>
+  <title>Epic Web Creator — 🔥 Creador Épico</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -106,13 +106,43 @@
 
         <div class="actions wrap">
           <button id="btn-download" class="primary">📥 Descargar imagen</button>
-
-
-
+          <button id="btn-copy" class="secondary">📋 Copiar texto</button>
+          <button id="btn-reset" class="secondary">🔄 Reiniciar</button>
+        </div>
+        <div class="actions wrap" style="margin-top: 20px;">
+          <button id="btn-ai-creator" class="ai-creator-btn">🤖 Probar Creador de Páginas Con IA</button>
         </div>
         <p class="muted center">📩 Envía la imagen a <strong>Genioinventor</strong> en Discord</p>
         <p class="muted center">📩 Envía la imagen a <strong>321 100 2280</strong> en WhatsApp</p>
 
+      </section>
+
+      <!-- AI Page Creator -->
+      <section id="step-ai-creator" class="step hidden">
+        <h2>🤖 Creador de Páginas Web con IA</h2>
+        <p class="muted">La IA creará la página web más avanzada del mundo según tu objetivo</p>
+        
+        <div class="ai-status" id="ai-status" style="display: none;">
+          <div class="loading-spinner"></div>
+          <p>Generando tu página web avanzada...</p>
+        </div>
+
+        <div id="ai-result" style="display: none;">
+          <h3>✨ Tu página web ha sido generada</h3>
+          <div class="preview-container">
+            <iframe id="preview-frame" sandbox="allow-scripts allow-same-origin" style="width: 100%; height: 400px; border: 1px solid #333; border-radius: 8px;"></iframe>
+          </div>
+          <div class="actions wrap" style="margin-top: 16px;">
+            <button id="btn-download-html" class="primary">📥 Descargar archivo HTML</button>
+            <button id="btn-fullscreen" class="secondary">🔍 Pantalla completa</button>
+            <button id="btn-regenerate" class="secondary">🔄 Regenerar</button>
+          </div>
+        </div>
+
+        <div class="actions two">
+          <button class="secondary" id="btn-ai-back">← Volver al resumen</button>
+          <button class="primary" id="btn-ai-generate">🚀 Generar página web</button>
+        </div>
       </section>
 
 
@@ -152,6 +182,11 @@
   <canvas id="confetti-canvas" class="confetti"></canvas>
   <canvas id="hidden-canvas" class="hidden"></canvas>
 
+  <script type="module">
+    import { GoogleGenAI } from 'https://cdn.jsdelivr.net/npm/@google/genai@1.20.0/+esm';
+    window.GoogleGenAI = GoogleGenAI;
+  </script>
+  <script src="ai-creator.js"></script>
   <script src="script.js"></script>
 </body>
 
