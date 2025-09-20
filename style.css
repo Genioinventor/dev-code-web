@@ -53,10 +53,77 @@ textarea{min-height:100px}
 /* confetti canvas */
 .confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:3}
 
+/* AI Creator Styles */
+.ai-creator-btn{
+  background:linear-gradient(90deg,#7c3aed,#ec4899);
+  border:none;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:800;
+  font-size:16px;
+  box-shadow:0 8px 25px rgba(124,58,237,0.3);
+  transform:translateY(0);
+  transition:transform .18s ease, box-shadow .18s ease;
+  animation:glow 2s infinite alternate;
+}
+
+.ai-creator-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 35px rgba(124,58,237,0.4);
+}
+
+@keyframes glow{
+  0%{box-shadow:0 8px 25px rgba(124,58,237,0.3)}
+  100%{box-shadow:0 8px 25px rgba(236,72,153,0.4)}
+}
+
+.ai-status{
+  background:linear-gradient(180deg, rgba(124,58,237,0.1), rgba(236,72,153,0.05));
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  margin:16px 0;
+  border:1px solid rgba(124,58,237,0.2);
+}
+
+.loading-spinner{
+  width:40px;
+  height:40px;
+  border:3px solid rgba(255,255,255,0.1);
+  border-top:3px solid #7c3aed;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin:0 auto 12px;
+}
+
+@keyframes spin{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+
+.preview-container{
+  margin:16px 0;
+  border-radius:8px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.02);
+}
+
+#ai-result{
+  background:linear-gradient(180deg, rgba(34,197,94,0.1), rgba(34,197,94,0.05));
+  padding:20px;
+  border-radius:12px;
+  margin:16px 0;
+  border:1px solid rgba(34,197,94,0.2);
+}
+
 /* responsive */
 @media(max-width:720px){
   .card{padding:16px;border-radius:12px}
   .emoji-hero{font-size:34px}
   h1{font-size:18px}
   textarea{min-height:80px}
+  .ai-creator-btn{font-size:14px;padding:12px 16px}
+  #preview-frame{height:300px}
 }
